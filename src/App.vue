@@ -1,10 +1,14 @@
 <script setup>
-  import  HelloWorld  from "./components/HelloWorld.vue";
+  // import  HelloWorld  from "./components/HelloWorld.vue";
+  import ReactiveFunction from "./components/ReactiveFunction.vue";
+  // import Computed from "./components/Computed.vue";
 </script>
 
 <template>
   <div id="app">
-    <HelloWorld />
+    <!-- <HelloWorld /> -->
+    <ReactiveFunction />
+     <!-- <Computed /> -->
   </div>
 </template>
 
