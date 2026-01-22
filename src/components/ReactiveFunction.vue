@@ -77,62 +77,54 @@ const tipCalculation = computed(() => {
 
 // grand total
 
-const gradeTotal = computed(() =>{
-    return billAmount.value + tipCalculation.value;
-})
+const gradeTotal = computed(() => {
+  return billAmount.value + tipCalculation.value;
+});
 // reset
 
-const resetBill = () =>{
-    billAmount.value = 0;
-    tipState.percentage = 0;
-}
+const resetBill = () => {
+  billAmount.value = 0;
+  tipState.percentage = 0;
+};
 
-const saveHistory = computed(() =>{
-    historyLogs.value.push(gradeTotal.value);
-})
-console.log({historyLogs});
-
+const saveHistory = computed(() => {
+  historyLogs.value.push(gradeTotal.value);
+});
+console.log({ historyLogs });
 </script>
 
 <template>
-<main>
-      <div>
-    <h1>Tip Calculator</h1>
-    <label>Bill Amount: </label>
-    <input
-      type="number"
-      v-model.number="billAmount"
-      placeholder="Bill Amount"
-    />
-    <label>Tip percentage: </label>
-    <select v-model.number="tipState.percentage">
-      <option value="10">10%</option>
-      <option  value="20">20%</option>
-      <option  value="30">30%</option>
-    </select>
+  <main>
+    <div>
+      <h1>Tip Calculator</h1>
+      <label>Bill Amount: </label>
+      <input
+        type="number"
+        v-model.number="billAmount"
+        placeholder="Bill Amount"
+      />
+      <label>Tip percentage: </label>
+      <select v-model.number="tipState.percentage">
+        <option value="10">10%</option>
+        <option value="20">20%</option>
+        <option value="30">30%</option>
+      </select>
 
-    <h2>TotalTips: {{ tipCalculation }}</h2>
-    <h2>gradeTotal : {{gradeTotal}}</h2>
-    <button @click="resetBill">Reset Bill</button>
-    <!-- save the history -->
-     <button @click="saveHistory"> Save History</button>
-  </div>
-  <!-- history logs -->
-   <h1>History Logs</h1>
-   <ul v-if="historyLogs.length > 0">
-    <li v-for="(item,index) in historyLogs" :key="index">
-        Save Total Tip: {{item}} 
-    </li>    
-   </ul>
-       <p v-else>no history are save here!!</p>
+      <h2>TotalTips: {{ tipCalculation }}</h2>
+      <h2>gradeTotal : {{ gradeTotal }}</h2>
+      <button @click="resetBill">Reset Bill</button>
+      <!-- save the history -->
+      <button @click="saveHistory">Save History</button>
+    </div>
+    <!-- history logs -->
+    <h1>History Logs</h1>
+    <ul v-if="historyLogs.length > 0">
+      <li v-for="(item, index) in historyLogs" :key="index">
+        Save Total Tip: {{ item }}
+      </li>
+    </ul>
+    <p v-else>no history are save here!!</p>
 
-
-  <div>
-
-
-
-
-
-  </div>
-</main>
+    <div></div>
+  </main>
 </template>
