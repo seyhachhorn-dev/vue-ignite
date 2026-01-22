@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, watch } from "vue";
 import TodoList from "./TodoList.vue";
 
 // parent data
@@ -17,6 +17,22 @@ const addItems = () => {
   todos.value.push(newTodo.value);
   newTodo.value = "";
 };
+
+// save into local storage
+onMounted(() =>{
+    const savedTodos = localStorage.getItem('todos');
+    if(savedTodos){
+        todos.value = JSON.parse(savedTodos);
+    }
+})
+
+watch(todos, (newValue) => {
+
+    localStorage.setItem('todos', JSON.stringify(newValue))
+
+}, {deep: true })
+
+
 </script>
 
 <template>
@@ -27,7 +43,7 @@ const addItems = () => {
     </h1>
 
     <!-- Input + Add Button -->
-    <form class="flex gap-2 mb-6">
+    <form class="flex gap-2 mb-6" @submit.prevent="addItems">
       <input
         type="text"
         v-model="newTodo"
