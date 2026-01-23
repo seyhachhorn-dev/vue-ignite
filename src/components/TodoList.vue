@@ -6,19 +6,24 @@ const props = defineProps({
   }
 })
 
-const emit = defineEmits(["deleteItems"])
+const emit = defineEmits(["deleteItems","toggleComplete"])
 </script>
 
 <template>
   <ul class="space-y-3">
     <li
-      v-for="(item, index) in todos"
-      :key="index"
+      v-for="(todo, index) in todos"
+      :key="todo.id"
       class="flex items-center justify-between bg-white border rounded-lg px-4 py-2 shadow-sm hover:bg-gray-50 transition"
     >
-      <p class="text-gray-800 text-sm">{{ item }}</p>
+      <span 
+      :class="{ 'line-through text-gray-500': todo.completed }"
+      class="text-gray-800 text-sm cursor-pointer select-none" 
+      @click="emit('toggleComplete',index)">
+      {{ todo.content }}
+    </span>
       <button
-        @click="$emit('deleteItems', index)"
+        @click="emit('deleteItems', index)"
         class="text-red-500 hover:text-red-700 font-medium text-sm"
       >
         Delete
