@@ -3,13 +3,15 @@
   // import ReactiveFunction from "./components/ReactiveFunction.vue";
   // import Computed from "./components/Computed.vue";
   // import HistoryLogs from "./components/HistoryLogs.vue";
-  import ToDoApp from "./components/TodoApp.vue";
+  import AccodionComponent from "./components/AccodionComponent.vue";
+import ToDoApp from "./components/TodoApp.vue";
 </script>
 
 <template>
   <div id="app">
     <!-- <HistoryLogs /> -->
-  <ToDoApp />
+     <AccodionComponent/>
+  <!-- <ToDoApp /> -->
   </div>
 </template>
 
