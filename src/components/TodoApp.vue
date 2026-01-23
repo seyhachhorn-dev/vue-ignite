@@ -1,11 +1,38 @@
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import TodoList from "./TodoList.vue";
 
 // parent data
 const todos = ref([]);
 const newTodo = ref("");
 const dailyQuote = ref("Loading inspiration...");
+const filter = ref('all');
+
+// filtered todos
+
+const filteredTodos = computed(() => {
+  if (filter.value === 'done') {
+    return todos.value.filter(t => t.completed);
+  }
+  if (filter.value === 'active') {
+    return todos.value.filter(t => !t.completed);
+  }
+  else {
+    return todos.value;
+  }
+
+})
+
+// count not completed todos
+
+const remainingTodos = computed(() => {
+  return todos.value.filter(t => !t.completed).length;
+})
+
+// function (t) {
+//   return !t.completed;
+// }
+
 
 // fetch api
 const getQuote = async () => {
@@ -27,8 +54,8 @@ const getQuote = async () => {
 console.log(dailyQuote.value);
 
 // delete todo
-const deleteItems = (index) => {
-  todos.value.splice(index, 1);
+const deleteItems = (id) => {
+  todos.value = todos.value.filter(t => t.id !== id);
 };
 
 // add new todo
@@ -45,16 +72,16 @@ const addItems = () => {
 
 // toggle complete todo
 
-const toggleComplete = (index) =>{
-  const todo = todos.value[index];
-  todo.completed = !todo.completed;
+const toggleComplete = (id) => {
+  const todo = todos.value.find(t => t.id === id);
+  if (todo) todo.completed = !todo.completed;
 }
 
 
 // save into local storage
 
 onMounted(() => {
-      getQuote();
+  getQuote();
 
   try {
     const savedTodos = localStorage.getItem('todos');
@@ -77,7 +104,17 @@ watch(todos, (newValue) => {
 </script>
 
 <template>
+
   <div class="max-w-md w-full mx-auto mt-10 px-4">
+    <div class="flex justify-between items-center mb-4 text-sm text-gray-600">
+      <span>{{ remainingTodos }} items left to do</span>
+      <button v-if="todos.some(t => t.completed)" @click = "todos = todos.filter(t => !t.completed)"
+        class="hover:text-red-500 underline"
+        >
+        Clear Completed
+      </button>
+
+    </div>
     <p class="text-sm italic text-gray-500 mb-4 text-center">"{{ dailyQuote }}"</p>
     <!-- Title -->
     <h1 class="text-3xl font-bold text-blue-600 text-center mb-6">
@@ -96,7 +133,11 @@ watch(todos, (newValue) => {
 
     <!-- Todo List -->
     <div>
-      <TodoList :todos="todos" @deleteItems="deleteItems" @toggleComplete="toggleComplete" />
+      <TodoList :todos="filteredTodos" @deleteItems="deleteItems" @toggleComplete="toggleComplete"
+        @changeFilter="(val) => filter = val" />
+
+      <!-- you are saying: "When the child emits 'changeFilter', 
+        take the value it sent (val) and immediately update my filter variable." -->
     </div>
   </div>
 </template>
