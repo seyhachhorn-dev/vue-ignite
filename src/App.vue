@@ -5,6 +5,7 @@
   // import HistoryLogs from "./components/HistoryLogs.vue";
   import AccodionComponent from "./components/AccodionComponent.vue";
 import FormValidation from "./components/FormValidation.vue";
+import PasswordGenerator from "./components/PasswordGenerator.vue";
 import ToDoApp from "./components/TodoApp.vue";
 </script>
 
@@ -13,7 +14,8 @@ import ToDoApp from "./components/TodoApp.vue";
     <!-- <HistoryLogs /> -->
      <!-- <AccodionComponent/> -->
   <!-- <ToDoApp /> -->
-   <FormValidation/>
+   <!-- <FormValidation/> -->
+    <PasswordGenerator/>
   </div>
 </template>
 
