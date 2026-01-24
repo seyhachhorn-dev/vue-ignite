@@ -4,14 +4,16 @@
   // import Computed from "./components/Computed.vue";
   // import HistoryLogs from "./components/HistoryLogs.vue";
   import AccodionComponent from "./components/AccodionComponent.vue";
+import FormValidation from "./components/FormValidation.vue";
 import ToDoApp from "./components/TodoApp.vue";
 </script>
 
 <template>
   <div id="app">
     <!-- <HistoryLogs /> -->
-     <AccodionComponent/>
+     <!-- <AccodionComponent/> -->
   <!-- <ToDoApp /> -->
+   <FormValidation/>
   </div>
 </template>
 
