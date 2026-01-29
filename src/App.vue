@@ -11,6 +11,7 @@ import MainStepper from "./components/MainStepper.vue";
 import PasswordGenerator from "./components/PasswordGenerator.vue";
 import ProgressStep from "./components/ProgressStep.vue";
 import ToDoApp from "./components/TodoApp.vue";
+import WekiClone from "./components/WekiClone.vue";
 </script>
 
 <template>
@@ -23,7 +24,8 @@ import ToDoApp from "./components/TodoApp.vue";
      <!-- <ProgressStep/> -->
       <!-- <MainStepper/> -->
        <!-- <DadJokeAPI /> -->
-        <GitHubSearchUserProfiel />
+        <!-- <GitHubSearchUserProfiel /> -->
+         <WekiClone/>
   </div>
 </template>
 
